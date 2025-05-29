@@ -116,3 +116,20 @@ A. Swift에서 싱글톤은 보통 static let shared = MySingleton()과 private 
 스레드 안전 초기화를 자동으로 보장합니다. 내부적으로는 Swift 런타임이 GCD의 dispatch_once와 같은 방식으로 한 번만 안전하게 초기화합니다.
 
 static의 경우 dispatch_once를 보장하고, let을 통해 불변성을 강조해 thread-safe하게 설정합니다.
+
+## 📅 2025-05-29
+
+질문 6
+
+Q. 프로세스와 스레드의 차이점, 그리고 iOS에서의 프로세스와 스레드 관리 방법에 대해 설명해주세요.
+
+A. 운영체제로부터 시스템 자원을 할당받는 작업의 단위를 프로세스라고 하며 이 한 프로세스 내에서 동작되는 여러 실행의 흐름을 스레드라고 합니다.
+
+프로세스의 경우 한 프로세스 당 힙, 스택, 코드, 데이터 영역을 할당 받고 스레드는 프로세스 내에서 스택 영역만 독립적으로 할당받고 그 외엔 공유하는 차이점이 있습니다.
+
+프로세스는 독립적인 구조이기 때문에 안정성이 높지만 Context Switching 시 CPU의 오버헤드 가능성이 있는데, 스레드는 하나의 프로세스 내에서 여러 스레드를 동시 실행하기 때문에 CPU 자원을
+효율적으로 활용할 수 있습니다.
+
+iOS에서는 GCD(Grand Central Dispatch)와 NSOperationQueue, Swift Concurrency를 사용하여 스레드를 관리합니다.
+
+프로세스는 iOS 시스템 상 자동으로 라이프사이클에 따라 관리하도록 합니다. 예를 들면, Foreground, Background, Suspended 등 상태가 있습니다.
